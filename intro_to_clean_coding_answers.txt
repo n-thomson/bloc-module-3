@@ -7,13 +7,13 @@ ATM machine -- not rightly authorizing and authenticating a user can lead to vul
 3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
 No, function, parameter, and variable names are not meaningful.
 
-FUNCTION convertTemperature(value, unit)          // Creating a new function called convertTemperature
- IF unit = "F" THEN                               // Check if unit is equal "F"
+FUNCTION convertTemperature(value, unit)
+ IF unit = "F" THEN
  SET tempInCelsius to (value−32) * (5/9)          // Formula to convert degrees fahrenheit to celsius
- PRINT tempInCelsius                              // Print tempInCelsius
- ELSE IF unit = "C" THEN                          // If unit not equal to "F", check if equal to "C"
+ PRINT tempInCelsius                              
+ ELSE IF unit = "C" THEN
  SET tempInFahrenheit to value * 1.8000 + 32.00   // Formula to convert degrees celsius to fahrenheit
- PRINT tempInFahrenheit                           // Print tempInFahrenheit
+ PRINT tempInFahrenheit
  END IF
 END FUNCTION
 
