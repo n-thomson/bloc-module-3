@@ -22,8 +22,8 @@ CALL printNumbers WITH number
 		INCREMENT number
 
 3.	Create a function that searches for a specific entry in a phonebook.
-CALL searchContact WITH name RETURNING result
-	FOR each entry in the contact array
+CALL searchContact WITH name
+	FOR each contact in contacts
 		IF name is equal to the search name THEN
 			RETURN result
 		END IF
