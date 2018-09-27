@@ -1,0 +1,43 @@
+1.	Why do programmers use pseudocode?
+To logically breakdown the problem into steps that are understandable to humans
+
+2.	If you run pseudocode on your computer what would happen?
+Psuedocode is an informal language that breaks down large problem into steps that the programmers use to develop the solution
+
+Programming Assignment—Write the following algorithms in pseudocode:
+
+1.	 Create a function that takes two numbers and prints out the greater number.
+CALL greater WITH number1, number2 RETURNING result
+IF number1 is greater than number2 THEN
+	RETURN number1
+ELSE
+	RETURN number2
+END IF
+
+2.	Create a function that prints out the numbers from 1 to 100.
+INIT number to 1
+WHILE the number is less than or equal to 100
+	PRINT number
+	INCREMENT number
+
+3.	Create a function that searches for a specific entry in a phonebook.
+CALL searchContact WITH name RETURNING result
+FOR each entry in the contact array
+	IF name is equal to the search name THEN
+		RETURN result
+	END IF
+RETURN contact not found
+END FOR
+
+4.	Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
+
+//javascript code
+var contacts = [{name:'sandra', age:25}, {name:'peter', age:31}, {name:'john', age:23}, {name:'michelle', age:19}];
+function searchContact(name){
+	for (let i=0; i<contacts.length; i++){
+		if (contacts[i].name ===name){
+			return contacts[i];
+		}
+	}
+	return 'Contact not found';
+}
