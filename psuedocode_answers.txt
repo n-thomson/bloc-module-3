@@ -7,28 +7,32 @@ Psuedocode is an informal language that breaks down large problem into steps tha
 Programming Assignment—Write the following algorithms in pseudocode:
 
 1.	 Create a function that takes two numbers and prints out the greater number.
-CALL greater WITH number1, number2
+FUNCTION greater(number1, number2)
 	IF number1 is greater than number2 THEN
 		RETURN number1
 	ELSE
 		RETURN number2
 	END IF
+END FUNCTION
 
 2.	Create a function that prints out the numbers from 1 to 100.
 INIT number to 1
-CALL printNumbers WITH number
+FUNCTION printNumbers(number)
 	WHILE the number is less than or equal to 100
 		PRINT number
 		INCREMENT number
+	END WHILE
+END FUNCTION
 
 3.	Create a function that searches for a specific entry in a phonebook.
-CALL searchContact WITH name
+FUNCTION searchContact(name)
 	FOR each contact in contacts
 		IF name is equal to the search name THEN
 			RETURN result
 		END IF
 	RETURN contact not found
 	END FOR
+END FUNCTION
 
 4.	Using the pseudocode you wrote for the previous question, implement it in any computer language of your choice.
 
