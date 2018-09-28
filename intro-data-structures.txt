@@ -1,0 +1,94 @@
+1. A line of people at an amusement park ride.
+
+
+var arr = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+var response = prompt("What do you want to do (Key in the number -- 1. Insert a new person; 2. Find a person; 3. Delete a person)?");
+if (response == 1){
+  let newEntry = prompt("Who do you want to add?");       //insert a new person
+  let insertResponse = prompt("Insert at the end of the line or inbetween - respond with 'end' or 'inbetween'");      //insert where - at the end or inbetween?
+  if (insertResponse.toLowerCase() === 'inbetween'){
+    addFriendInbetween(newEntry);
+  }
+  else{
+    arr.push(newEntry);
+    console.log(arr);
+  }
+}
+else if (response == 2){                                //find a person
+  let person = prompt("Who do you want to find?");
+  findPosition(person);
+}
+
+else if (response ==3){
+  let person = prompt("Who wants to leave?");
+  deletePerson(person);
+}
+
+else{
+  console.log("Invalid entry!");
+}
+
+function findIndex(person){
+  return arr.indexOf(person);
+}
+
+function addFriendInbetween(newEntry){
+  let whoseFriend = prompt("Whose friend is this?");
+  let index = findIndex(whoseFriend);
+  if (index!= -1){
+    arr.splice(index, 0, newEntry);
+    return arr;
+  }
+  else{
+  return "This person is not in line.";
+  }
+}
+
+function findPosition(person){
+  let index = findIndex(person);
+  if (index!= -1){
+    return `${person} is at position: ${index}`;
+  }
+  else{
+    return "This person is not in line.";
+  }
+}
+
+function deletePerson(person){
+  let index = findIndex(person);
+  arr.splice(index, 1);
+  return arr;
+}
+
+
+
+2. Enrolling queue at a daycare/preschool facility
+a) You can add a new applicant to the list -- with each new candidate being added at the end of the queue
+b) You can delete someone from the queue
+c) You can check the waitlist status
+
+var applicants = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+var response = prompt("What do you want to do (Key in the number -- 1. add new applicant; 2. remove an applicant; 3. check waitlist status)?");
+if (response == 1){
+  let newApplicant = prompt("Who do you want to add?");       //add new applicant
+  applicants.push(newApplicant);
+  console.log(applicants);
+}
+else if(response == 2){
+  let deleteApplicant = prompt("Who do you want to delete?");   //remove an applicant
+  let index = applicants.indexOf(deleteApplicant);
+  applicants.splice(index, 1);
+  console.log(applicants);
+}
+else if(response == 3){
+  let applicant = prompt("Whose waitlist status do you want to check?");    //check waitlist status?
+  let index = applicants.indexOf(applicant);
+  (index!= -1) ? console.log(`${applicant} is at position: ${index+1}`) : console.log("Not an applicant.");
+}
+else {
+  console.log("Invalid entry!");
+}
+
+
+3. How would your data structure allow developers to access and manipulate the data?
+I have used arrays in the above examples. Javascript has many array methods that we can utilize to access and manipulate data stored within arrays.
