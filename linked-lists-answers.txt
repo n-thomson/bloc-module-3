@@ -1,0 +1,213 @@
+1. What are some pros and cons of using linked lists instead of arrays?
+pros: * doesn't require adjacent memory
+      * inserting and deleting data doesn't require to shift subsequent data elements
+      * because it does not require adjacent memory like in arrays, overflow can never occur,
+        unless memory is actually full
+      * With large records, moving pointers is lot easier and faster than moving the data elements themselves
+cons: * indexing doesn't work; if we want to access a specific element, we need to traverse the list from head
+        to find the specific element, which can take longer than array, where we can access using indexing.
+      * does not support random access
+      * requires more memory
+      * linked lists use pointers, programming of which is trickier
+
+
+2. Come up with a real world example of a linked list.
+* Treasure hunt game
+* Train
+* Elevator - If we need to go to a particular floor, we always need to start from ground floor, moving one floor to teh next. 
+* Web browser history - where it creates a linked list of pages visited; when you press back button, it fetches the previous node data.
+* We can implement stacks/queues with linked lists
+
+
+
+1. The linked list push function should take a value, create a node, and add it to the end of a list.
+Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it.
+Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+  THEN SET head to node
+ELSE
+  WHILE current.next exists       //go to the end of the list and add node there -- this is done by setting current
+  SET current to current.next     //to current.next as long as current.next exists.
+  END WHILE                       //See 'add' method (Q.3 programming Questions) for the code.
+  SET current.next to node
+END IF
+END FUNCTION
+
+
+2. Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+
+class Node{
+  constructor(val){
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class LinkedList{
+  constructor(){
+    this.length = 0;
+    this.head = null;
+  }
+
+  add(val){
+    let newNode = new Node(val);
+    let currentNode = this.head
+    if(!currentNode){         //same as if(this.head === null)
+      this.head = newNode;
+      this.length++;
+      return newNode;
+    }
+    else{
+      while(currentNode.next){
+      currentNode = currentNode.next
+      }
+      currentNode.next = newNode;
+      this.length++;
+      return newNode;
+    }
+  }
+
+  removeDuplicate(){
+    let ptr1 = this.head;
+    let ptr2;
+    while(ptr1!= null) {
+      ptr2 = ptr1;
+      while(ptr2.next != null){
+        if(ptr1.value == ptr2.next.value){
+          ptr2.next = ptr2.next.next;
+          this.length--;
+        }
+        else {
+          ptr2 = ptr2.next;
+        }
+      }
+      ptr1 = ptr1.next;
+    }
+  }
+
+  display(){
+    let currentNode = this.head;
+    let output = '';
+    if(currentNode === null){
+      return('LinkedList is empty');
+    }
+    else{
+      while(currentNode.next){
+        let node =  '[' + currentNode.value + '] -> ';
+        output = output.concat(node);
+        currentNode = currentNode.next
+      }
+      let node =  '[' + currentNode.value + ']';
+      output = output.concat(node);
+      return output;
+    }
+  }
+}
+
+
+var ll = new LinkedList;
+ll.add('a');
+ll.add('c');
+ll.add('d');
+ll.add('d');
+ll.add('a');
+console.log(ll.display());
+console.log(ll.removeDuplicate());
+console.log(ll.display());
+
+
+3.Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+class Node{
+  constructor(val){
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class LinkedList{
+  constructor(){
+    this.length = 0;
+    this.head = null;
+  }
+
+  add(val){
+    let newNode = new Node(val);
+    let currentNode = this.head
+    if(!currentNode){         //same as if(this.head === null)
+      this.head = newNode;
+      this.length++;
+      return newNode;
+    }
+    else{
+      while(currentNode.next){
+      currentNode = currentNode.next
+      }
+      currentNode.next = newNode;
+      this.length++;
+      return newNode;
+    }
+  }
+
+  reverse(){
+    let currentNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+    if(currentNode === null){
+      console.log('LinkedList is empty');
+    }
+    else{
+      while(currentNode.next){
+        nextNode = currentNode.next;
+        currentNode.next = prevNode;
+        prevNode = currentNode;
+        currentNode = nextNode;
+        this.head = currentNode;
+      }
+      currentNode.next = prevNode;
+      return this;
+    }
+  }
+
+  display(){
+    let currentNode = this.head;
+    let output = '';
+    if(currentNode === null){
+      return('LinkedList is empty');
+    }
+    else{
+      while(currentNode.next){
+        let node =  '[' + currentNode.value + '] -> ';
+        output = output.concat(node);
+        currentNode = currentNode.next
+      }
+      let node =  '[' + currentNode.value + ']';
+      output = output.concat(node);
+      return output;
+    }
+  }
+
+}
+
+var ll = new LinkedList;
+ll.add('a');
+ll.add('b');
+ll.add('c');
+ll.add('d');
+
+console.log(ll.display());
+var reversedLL = ll.reverse();
+console.log(reversedLL.display());
