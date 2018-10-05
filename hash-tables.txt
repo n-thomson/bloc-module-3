@@ -1,0 +1,272 @@
+1. What is a hash table?
+Hash table is a data structure that is a collection of key-value pairs.
+
+2. What is hashing?
+Hashing is the process of converting the key into hash-code and then converting the hash code into index (where
+the value is stored) by modding (%) the hash code within the array capacity.
+
+3. How does a hash table store data?
+Hash table is a collection of key-value pairs, where the value/data is stored in an array index location that is
+calculated by converting the key into hash-code (by passing through a hashing function) and then applying
+the hash code with 'mod' of the array's capacity.
+
+4. How are hash tables and objects different?
+Hash tables are objects, where the key can be a string, function, or even an object. Hash tables preserve the order
+of elements(key-value pairs), making it iterable.
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+* A list of pets and their unique names. -- object
+* The name, age, and the birthday of your best friend. -- object
+* The name and location of every company in a given city. -- hash table
+* All of the books checked out from a library by a particular individual. -- hash table
+* The primary and secondary phone numbers for a contact. -- hash table
+
+
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system
+and look up customers using their phone numbers. Store this information in a hash table.
+
+var hash = function (string, maxBucket){
+  let hash = 0;
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i);
+  }
+  return hash % maxBucket;
+}
+
+
+class HashTable{
+  constructor(maxBucket){
+    this.storage = [];
+    this.maxBucket = maxBucket;
+    this.size = 0;
+  }
+
+  insert(key, value){
+    let index = hash(key, this.maxBucket);
+    let bucket = this.storage[index];
+
+    if(!bucket){
+      bucket = [];
+      bucket.push(key,value);
+      this.storage[index] = bucket;
+      this.size++;
+      return this;
+    }
+    else if (bucket[0] === key){
+        bucket[1] = value;
+    }
+    else{
+      console.log(`"${key}" resulting in collision; try another key!`);
+    }
+  }
+
+  remove(phone){
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i]
+      if((bucket) && (bucket[1].phone === phone)){
+        bucket = undefined;
+        this.storage[i]=bucket;
+        this.size--;
+        return this.storage;
+      }
+    }
+  }
+
+  retrieve(key){
+    let index = hash(key, this.maxBucket);
+    console.log(`Retrieved customer data: ${this.storage[index]}`);
+    return this.storage[index];
+  }
+
+  lookUp(phone){
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i]
+      if((bucket) && (bucket[1].phone === phone)){
+        return(this.retrieve(bucket[0]));
+      }
+    }
+  }
+}
+
+
+var customerData = new HashTable(12);
+customerData.insert('customer1', {name: 'Peter', address: '1212 Dummy Address, Pheonix, Arizona', phone: 2132154456});
+customerData.insert('customer2', {name: 'John', address: '233 Dummy Address, Tampa, Florida', phone: 3333333333});
+customerData.insert('customer3', {name: 'Sandra', address: '4445 Dummy Address, San Jose, California', phone: 8888888888});
+customerData.insert('1', {name: 'Paul', address: '777 Dummy Address, Waldorf, Maryland', phone: 1111111111});
+console.log(customerData);
+customerData.retrieve('1');
+customerData.lookUp(8888888888);
+customerData.remove(8888888888);
+console.log(customerData);
+customerData.insert('customer3', {name: 'William', address: '999 Dummy Address, Charleston, South Carolina', phone: 2222222222});
+console.log(customerData);
+
+
+
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+
+var hash = function (string, maxBucket){
+  let hash = 0;
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i);
+  }
+  return hash % maxBucket;
+}
+
+
+class HashTable{
+  constructor(maxBucket){
+    this.storage = [];
+    this.maxBucket = maxBucket;
+    this.size = 0;
+  }
+
+
+  insert(key, value){
+    let index = hash(key, this.maxBucket);
+    let bucket = this.storage[index];
+
+    if(!bucket){
+      bucket = [];
+      bucket.push(key,value);
+      this.storage[index] = bucket;
+      this.size++;
+      return this;
+    }
+    else if (bucket[0] === key){
+        bucket[1] = value;
+    }
+    else{
+      console.log(`"${key}" resulting in collision; try another key!`);
+    }
+  }
+
+  remove(item){
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i]
+      if((bucket) && (bucket[1].item === item)){
+        bucket = undefined;
+        this.storage[i]=bucket;
+        this.size--;
+        return this.storage;
+      }
+    }
+  }
+
+  retrieve(key){
+    let index = hash(key, this.maxBucket);
+    console.log(`Retrieved inventory data: ${this.storage[index]}`);
+    return this.storage[index];
+  }
+
+  lookUp(item){
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i]
+      if((bucket) && (bucket[1].item === item)){
+        return(this.retrieve(bucket[0]));
+      }
+    }
+  }
+}
+
+
+var inventoryData = new HashTable(12);
+inventoryData.insert('Item1', {item: 'Shoes', size: 10, qty: 15});
+inventoryData.insert('Item2', {item: 'Shirt', size: 'S', qty: 8});
+inventoryData.insert('Item3', {item: 'Jeans', size: 34, qty: 10});
+inventoryData.insert('1', {item: 'GraphicsTee', size: 'M', qty: 11});
+console.log(inventoryData);
+inventoryData.retrieve('1');
+inventoryData.lookUp('Jeans');
+inventoryData.remove('Shirt');
+console.log(inventoryData);
+inventoryData.insert('Item2', {item: 'Check Shirts', size: 'L', qty: 5});
+console.log(inventoryData);
+
+
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+Use hash tables to store the necessary data.
+
+var hash = function (string, maxBucket){
+  let hash = 0;
+  for(var i = 0; i < string.length; i++){
+    hash += string.charCodeAt(i);
+  }
+  return hash % maxBucket;
+}
+
+
+class HashTable{
+  constructor(maxBucket){
+    this.storage = [];
+    this.maxBucket = maxBucket;
+    this.size = 0;
+  }
+
+
+  insert(key, value){
+    let index = hash(key, this.maxBucket);
+    let bucket = this.storage[index];
+
+    if(!bucket){
+      bucket = [];
+      bucket.push(key,value);
+      this.storage[index] = bucket;
+      this.size++;
+      return this;
+    }
+    else if (bucket[0] === key){
+        bucket[1] = value;
+    }
+    else{
+      console.log(`"${key}" resulting in collision; try another key!`);
+    }
+  }
+
+  remove(article){
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i]
+      if((bucket) && (bucket[1].title === article)){
+        bucket = undefined;
+        this.storage[i]=bucket;
+        this.size--;
+        return this.storage;
+      }
+    }
+  }
+
+  retrieve(key){
+    let index = hash(key, this.maxBucket);
+    console.log(`Retrieved news data for key ${key}: ${this.storage[index]}`);
+    return this.storage[index];
+  }
+
+  lookUp(info){
+    let relevantArticles = [];
+    for(let i=0; i<this.maxBucket; i++){
+      let bucket = this.storage[i];
+      if((bucket) && (bucket[1].date === info || bucket[1].publisher === info)){
+        var article = bucket;
+        relevantArticles.push(article[1].title);
+      }
+      article = undefined;
+    }
+    console.log(`Retrieved news article for ${info}: ${relevantArticles}`);
+    return relevantArticles;
+  }
+}
+
+
+var news = new HashTable(12);
+news.insert('newsItem1', {title: "How to Disconnect From ‘Always On’ Work Culture", date: '10/05/2018', author: 'Matthew Kitchen', publisher: 'Wall Street Journal'});
+news.insert('newsItem2', {title: 'The 19 Best Cookbooks of Fall 2018', date: '10/02/2018', author: 'Sonny Figueroa', publisher: 'The New York Times'});
+news.insert('1', {title: 'Nobel Prize in Chemistry Goes to a Woman for the Fifth Time in History', date: '10/03/2018', author: 'Sandra E. Garcia', publisher: 'The New York Times'});
+console.log(news);
+news.retrieve('1');
+news.lookUp('The New York Times');
+news.lookUp('10/05/2018');
+news.remove('How to Disconnect From ‘Always On’ Work Culture');
+console.log(news);
+news.insert('newsItem1', {title: 'HSBC Taps Goldman Sachs Banker as Financial Institutions Chief', date: '10/05/2018', author: 'Margot Patrick', publisher: 'Wall Street Journal'});
+console.log(news);
