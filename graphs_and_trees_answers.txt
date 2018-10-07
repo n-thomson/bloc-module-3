@@ -1,0 +1,276 @@
+1.  What is a binary tree and what makes it unique to other trees?
+    Binary tree is a data structure in which each node has two or less nodes. If no child nodes are present,
+    then they are called leaf nodes.
+
+2.  What is a heuristic?
+    These are guesses that an algorithm makes for solving a problem more quickly, by sacrificing accuracy.
+
+3.  What is another problem besides the shortest-path problem that requires the use of heuristics?
+    Virus scanning uses heuristic rules, which look for behavioral patterns common to a family of virus (with
+    different set of rules for different viruses). If they match, the scanner infers that the file is corrupt/infected.
+
+4.  What is the difference between a depth-first search and a breadth-first search?
+    In Depth-First-Search(DFS), the algorithm first traverses deep within one branch, before moving onto other nodes.
+    Breadth-First-Search(BFS), on the contrary, traverses all nodes at the same level, before moving
+    to the nodes at next level.
+
+5.  Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+    Undirected, a-cyclic, unweighted graph is a type of graph where the edges are not directed (meaning there is no
+    start and stop, it only denotes a connection between the nodes), the nodes don't form a loop, and there are no weights
+    assigned to the edges (where weight is the cost of travelling between those nodes).
+
+6.  What kind of graph is a binary search tree?
+    Directed, a-cyclic, unweighted graph.
+
+PROGRAMMING EXERCISE
+1.  Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+    FUNCTION findNode(value, node is equal to root)
+      IF node.value is equal to value
+        RETURN value exists
+      ELSE IF value greater than node.value
+        WHILE node.right exists
+          SET node to node.right
+          RETURN CALL findNode with value and node
+        END WHILE
+        RETURN value does not exist
+      ELSE IF value less than node.value
+        WHILE node.left exists
+          SET node to node.left
+          RETURN CALL findNode with value and node
+        END WHILE
+        RETURN value does not exist
+      END IF
+    END FUNCTION
+
+
+    class Node{
+      constructor(value, left = null, right = null){
+        this.value = value;
+        this.left = left;
+        this.right = right;
+      }
+    }
+
+
+    class BinarySearchTree{
+      constructor(){
+        this.root = null;
+      }
+
+      addNode(value){
+        let node = this.root;
+        if(node === null){
+          this.root = new Node(value);
+          return;
+        }
+        else{
+          this.searchTree(node, value);
+        }
+      }
+
+      searchTree(node, value){
+        if(value > node.value){
+          if(node.right === null){
+            node.right = new Node(value);
+            return;
+          }
+          else {
+            while(node.right !== null){
+              return this.searchTree(node.right, value);
+            }
+          }
+        }
+        else if(value < node.value){
+          if(node.left === null){
+            node.left = new Node(value);
+            return;
+          }
+          else {
+            while(node.left !== null){
+              return this.searchTree(node.left, value);
+            }
+          }
+        }
+        else{
+          return null;
+        }
+      }
+
+      search(value, node = this.root){
+        if(node.value === value){
+          console.log(`${value} exists in the tree`);
+          return `${value} exists in the tree`;
+        }
+        else if(value > node.value){
+          while(node.right){
+            node = node.right;
+            return this.search(value, node);
+          }
+          console.log(`${value} does not exist in the tree`);
+          return `${value} does not exist in the tree`;
+        }
+        else if(value < node.value){
+          while(node.left){
+            node = node.left;
+            return this.search(value, node);
+          }
+          console.log(`${value} does not exist in the tree`);
+          return `${value} does not exist in the tree`;
+        }
+      }
+    }
+
+
+    var tree = new BinarySearchTree();
+    tree.addNode(8);
+    tree.addNode(10);
+    tree.addNode(3);
+    tree.addNode(1);
+    tree.addNode(6);
+    tree.addNode(4);
+    tree.addNode(7);
+    tree.addNode(14);
+    tree.addNode(13);
+    console.log(tree);
+    tree.search(6);
+    tree.search(18);
+    tree.search(13);
+    tree.search(22);
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+FUNCTION findDistance(node1, node2)
+  SET node to root
+  IF node1 or node2 is equal to root
+    SET distance to zero
+    SET searchValue to the other
+    CALL calcDistance with searchValue, node, and distance
+    RETURN distance
+  ELSE
+    SET distance and distance1 to zero
+    SET searchValue to node1
+    CALL calcDistance with searchValue, node, and distance
+    SET searchValue to node2
+    CALL calcDistance with searchValue, node, and distance1
+    RETURN distance
+  END IF
+END FUNCTION
+
+class Node{
+  constructor(value, left = null, right = null){
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null;
+  }
+
+  addNode(value){
+    let node = this.root;
+    if(node === null){
+      this.root = new Node(value);
+      return;
+    }
+    else{
+      this.searchTree(node, value);
+    }
+  }
+
+  searchTree(node, value){
+    if(value > node.value){
+      if(node.right === null){
+        node.right = new Node(value);
+        return;
+      }
+      else {
+        while(node.right !== null){
+          return this.searchTree(node.right, value);
+        }
+      }
+    }
+    else if(value < node.value){
+      if(node.left === null){
+        node.left = new Node(value);
+        return;
+      }
+      else {
+        while(node.left !== null){
+          return this.searchTree(node.left, value);
+        }
+      }
+    }
+    else{
+      return null;
+    }
+  }
+
+  findDistance(node1, node2){
+    let node = this.root;
+    var searchValue;
+    if(node1 === node.value || node2 === node.value){
+      var distance = 0;
+      (node1 === node.value) ? searchValue = node2 : searchValue = node1;
+      distance = this.calcDistance(searchValue, node, distance);
+      console.log(`distance between ${node1} and ${node2}: ${distance}`);
+      return distance;
+    }
+    else {
+      var distance = 0;
+      let distance1 = 0;
+      let distance2 = 0;
+      searchValue = node1;
+      distance1 = this.calcDistance(searchValue, node, distance);
+      searchValue = node2;
+      distance = this.calcDistance(searchValue, node, distance1);
+      console.log(`distance between ${node1} and ${node2}: ${distance}`);
+      return distance;
+    }
+  }
+
+  calcDistance(searchValue, node, distance){
+    if(searchValue === node.value){
+      return distance;
+    }
+    else if(searchValue > node.value){
+      while(node.right){
+        node = node.right;
+        distance++;
+        return this.calcDistance(searchValue, node, distance);
+      }
+      console.log(`${searchValue} does not exist in the tree`);
+      return;
+    }
+    else if(searchValue  < node.value){
+      while(node.left){
+        node = node.left;
+        distance++;
+        return this.calcDistance(searchValue, node, distance);
+      }
+      console.log(`${searchValue} does not exist in the tree`);
+      return;
+    }
+  }
+}
+
+
+var tree = new BinarySearchTree();
+tree.addNode(8);
+tree.addNode(10);
+tree.addNode(3);
+tree.addNode(1);
+tree.addNode(6);
+tree.addNode(4);
+tree.addNode(7);
+tree.addNode(14);
+tree.addNode(13);
+console.log(tree);
+tree.findDistance(8,10);
+tree.findDistance(4,10);
+tree.findDistance(1,14);
+tree.findDistance(7,13);
