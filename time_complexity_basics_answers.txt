@@ -1,0 +1,77 @@
+1.  What is time complexity and what is its relation to algorithms?
+    Time complexity is the time it takes to execute a program. It defines how the time to run the program grows
+    with the amount of input we feed into the program.
+
+2.  What is runtime?
+    Runtime is the time duration of an algorithm.
+
+3.  How is the runtime of an algorithm calculated?
+    1. Identify all the statements and determine the runtime for each
+    2. Add up all the runtimes to create an expression
+    3. Drop all constants
+    4. Simplify the expression to the largest term
+    5. If there is a multiplier or coefficient for the largest term, drop it, and this gives the runtime
+    for the algorithm
+
+
+4.  Name the six types of algorithm growth rates we saw in this checkpoint and list them in order of most efficient
+    to least efficient. Now Google another algorithmic growth rate not covered and place it in the correct spot in your list.
+    O(1), O(Log n), O(n), O(n log n), O(2^n), O(n^2), and O(n!)
+
+5.  Choose one of the algorithmic growth rates from the last question and make a comparison to a real-life situation.
+
+    Time complexity = O(n)
+
+    Example: counting the number of students in a class.
+
+    var students =['Anna', 'Peter', 'John', 'Jacob', 'Melissa'];
+    var count = 0;
+    for (let i=0; i<students.length; i++){        // loop happens 5 times;
+      count += 1;                                 //no. of times the loop executes is directly proportional to the array size
+    }
+
+6. Determine the time complexity of the following snippet of code. It is commonly known as a linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array
+   IF number = target THEN
+     RETURN true
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+// Time complexity = O(n)
+
+7. Determine the time complexity of the following snippet of code.
+
+If you get stuck, read through the graphical representation section again.
+
+FUNCTION foo(array)
+ FOR each number in the array
+   FOR each number in the array
+     print "Hello"
+   END FOR
+ END FOR
+END FUNCTION
+
+// Time complexity = O(n^2)
+
+8.  Determine the time complexity of the following snippet of code. It is commonly known as the Fibonacci sequence.
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+// Time complexity = O(2^n)
+
+9.  Out of the code snippets you just saw, which is the most time efficient?
+Linear search with time complexity O(n) is the most efficient.
