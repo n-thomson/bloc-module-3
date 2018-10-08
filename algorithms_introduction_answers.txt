@@ -1,0 +1,70 @@
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+a.  Making coffee;
+    GET empty vessel
+    ADD 2/3 cup of milk and 1/3 cup of water to vessel
+    PUT vessel on burner
+    SET burner to ON
+    WHILE not boiling
+      stir
+    END WHILE
+    SET burner to OFF
+    ADD 1.5 tsp coffee powder and 1tsp sugar
+    SET empty cups
+    ADD coffee to empty cups
+
+b.  Washing dishes;
+    SET faucet to ON
+    WHILE water is coming in faucet and dirty dishes exist
+      FOR each dirty dish in the pile
+        GET dish
+        PUT under water
+        PUT soap on dish
+        PUT the dish under water to rinse
+        MOVE washed dish to drying rack
+      END FOR
+    END WHILE
+    SET faucet to OFF
+
+c. A choice of your own - reheating food in microwave
+  SET microwave door to open
+  PUT the bowl with food in the microwave
+  PUT lid to cover food
+  SET time
+  SET microwave door to close
+  SET microwave to start
+  WHILE food is not warm
+    SET microwave door to open
+    SET time
+    SET microwave door to close
+    SET microwave to start
+  END WHILE
+  SET microwave door to open
+  SET food ready
+  SET microwave door to close
+
+2.  Name three companies who created an algorithm that made them successful
+    * Facebook friend suggestion algorithm - Facebook is well-known for its amazing data mining algorithms and machine
+    learning features that it uses to make friend suggestions. It compares all the information you offer
+    to suggest you connections, such as people from your high school, from the same living area, your interests,
+    mutual friends, etc. In addition to that, Facebook has taken a step ahead in guessing who can become your friend
+    from the places you often go, via the concept of suggesting connections based on mutual network connectivity options.
+
+    * Instagram's algorithm - Instagram algorithm dictates the order of the posts that users see when they’re
+    scrolling through their feed. It considers numerous factors such as relationship with user, interest the user has
+    conveyed, and recency of the post to prioritize posts, pushing the most relevant ones towards the top and
+    giving them the most visibility, while other content ends up being placed further down in one's feed.
+
+    * Youtube algorithm for video suggestion - There are six key places where this algorithm impacts by determining the videos
+    to show: in search results, the suggested videos stream, on the home page, the trending stream, under the
+    viewer’s subscriptions, and through any notifications they have set up. Youtube's ranking algorithm focuses on how the
+    audience interacts with videos, using artificial intelligence via audience feedback, which broadly covers - what they
+    do (and don’t) watch; how much time they spend watching a video (watch time); how much time they spend watching videos
+    during each visit (session time); and likes, dislikes, and ‘not interested’ feedback.
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+* Stable - the algorithm provides stable and consistent output
+* Uniqueness - the results of each step are uniquely defined and only depend on the input and the result of preceding steps
+* Finiteness - the algorithm stops after the execution of a finite number of instructions
+* Eficient - utilizes an efficient approach to solve the problem
