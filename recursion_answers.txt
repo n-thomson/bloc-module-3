@@ -1,0 +1,82 @@
+1.  Define and compare recursion and iteration.
+    Iteration utilizes a loop to repeat a process, where as recursion is the process of a function calling itself,
+    starting with a base case. As long as the base case is false, the recursive procedure is called and executed.
+    There may be one or more base cases. In iteration, the condition needs to be true for the process to repeat.
+
+2.  Name five algorithms that are commonly implemented by recursion.
+    factorial, fibonacci, binary search, linked list, and trees
+
+3.  When should you use recursion, and when should you avoid recursion? Give examples for each.
+    Recursion is used when you can break the problem into smaller problems that make use of the same function. It should
+    have base case(s) to begin with, which should eventually turn true to avoid an infinite loop (with every recursion
+    making a progress towards the base case). Recursion usually uses shorter and cleaner codes. e.g., factorial.
+    Recursion should be avoided if it's going to take up too much memory, because each recursion call is going to add
+    up to the method stack. e.g., finding the maximum of numbers in the checkpoint example, this is going to get complex as
+    the number in the collection increases, so the cost of implementation should be taken into consideration when choosing
+    between recursive and iterative.
+
+4.  Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum,
+    and fibonacci). What is similar, and what is different?
+    Similarities
+    * Both involves repetition - lines of codes are executes over and over again
+    * Both involves a condition test
+    * If not coded well, both can lead to infinite loop
+
+    Difference
+    * There is one or more base cases, if false, recursive function is called. In iteration, the loop is executed so long as
+    the condition is met
+    * Recursion breaks the problem into smaller problems that make use of the same function, with every recursion
+    making a progress towards the base case
+    * Recursion usually involves lesser number of codes and are more readable
+    * Recursion is slower in most cases
+
+5.  Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive
+    algorithm to count the number of items in the entire collection.
+
+    function count(array){
+      if(!Array.isArray(array)){
+        return 1;
+      }
+      else {
+        let counter = 0;
+        array.forEach(arrayItem => {
+          counter += count(arrayItem);
+        });
+        return counter;
+      }
+    }
+
+    console.log(count([1,2,1,[1,2],[1,2],[1,2,3,[1,2]]]));
+
+6.  A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive
+    algorithm to determine if a given word or phrase is a palindrome.
+
+    function isPalindrome(word){
+      word = word.toLowerCase().replace(/[\W_]/g, '');
+      if(word.length === 1){
+        return true;
+      }
+      else {
+        let length = word.length;
+        let firstChar = word[0];
+        let lastChar = word[length-1];
+        if(firstChar === lastChar){
+          let remainingChars = ((length > 1) ? (word.slice(1,length-1)): firstChar);
+          return isPalindrome(remainingChars);
+        }
+        else{
+          return false;
+        }
+      }
+    }
+
+    console.log(`Don't nod. : ${isPalindrome("Don't nod.")}`);
+    console.log(`race car : ${isPalindrome("race car")}`);
+    console.log(`A man, a plan, a canal. Panama : ${isPalindrome("A man, a plan, a canal. Panama")}`);
+    console.log(`not a palindrome : ${isPalindrome("not a palindrome")}`);
+
+
+7.  Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why
+    this behavior exhibits properties of recursion.
+    It's a fun element introduced by Google, because recursion means calling itself. It has set up the did you mean for
+    recursion as recursion itself.
