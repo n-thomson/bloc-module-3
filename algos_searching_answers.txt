@@ -1,0 +1,76 @@
+1. What is a real-life scenario that uses linear search?
+   You are looking for an address on a particular street.
+
+2. What is a real-life scenario that uses binary search?
+   Searching for a word in dictionary.
+
+3. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find
+   the value G using linear search?
+   Seven
+
+4. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find
+   the value G using binary search?
+   Three
+
+5. Given an unsorted collection of a million items, which algorithm would you choose between linear search
+   and binary search? Explain your reasoning.
+   Sort the list and then perform binary search. Even though sorting would take some additional time,
+   binary search is more efficient here, as it follows a divide and conquer policy in contrast to linear search,
+   which goes item by item till the desired item or the end of the array is reached.
+
+6. Given a sorted collection of a million items, which algorithm would you choose between linear search and
+   binary search? Explain your reasoning.
+   Binary search; because this is a large collection, we can arrive at the answer faster by utilizing binary search
+   as it follows a divide and conquer policy, where as linear search would go item by item till we reach the item we are
+   looking for and this would be time consuming given the size of the current collection.
+
+Programming Assignment:
+1. You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+
+
+function binarySearch(collection, value){
+  value = value.toLowerCase();
+  let low = 0
+  let high = collection.length-1;
+  let mid;
+  let counter = 0;
+
+  while(low<=high){
+    counter++;
+    mid = Math.floor((low+high)/2);
+    if(value > collection[mid]){
+      low = mid+1;
+    }
+    else if(value < collection[mid]){
+      high = mid-1;
+    }
+    else if(value === collection[mid]){
+      return `Found 'Albatross' in ${counter}th search at index ${mid}`;
+    }
+  }
+  return "not found";
+}
+
+collection = ['a', 'aaa', 'aaaa', 'albatross', 'bakdsa', 'dfsdf', 'sdfsd', 'sdfsdf', 'sfdkdjfkl'];
+newCollection = collection.sort();
+value = 'Albatross';
+console.log(binarySearch(newCollection, value));
+
+
+2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+  function linearSearch(collection, targetFish){
+    let result;
+    for(let i=0; i<collection.length; i++){
+      if(collection[i]===targetFish){
+        result = i+1;
+        break
+      }
+    }
+    return `${result}th fish is the white-spotted goldfish`;
+  }
+
+
+  collection = ['a', 'b', 'c', 'spotted-goldfish', 'd'];
+  targetFish = 'spotted-goldfish';
+  console.log(linearSearch(collection, targetFish));
