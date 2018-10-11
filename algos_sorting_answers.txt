@@ -1,0 +1,122 @@
+1.  Write pseudocode for bubble sort.
+
+FUNCTION bubbleSort(collection)
+  SET length to length of collection
+  SET k to 0      //after pass 1, last item is sorted. Similarly after pass 2, last 2 items are sorted, and so on.
+  repeat
+  SET swapped to false
+    FOR i = first index to (length - 1 - k )
+      IF collection[i] > collection[i+1] THEN
+        SET temp = collection[i];
+        SET collection[i]=collection[i+1];
+        SET collection[i+1] = temp;
+        SET swapped to true;
+      END IF
+    END FOR
+    INCREMENT k
+  UNTIL swapped is false
+  RETURN collection
+END FUNCTION
+
+function bubbleSort(collection){
+  length = collection.length;
+  let k=0;
+  do{
+    swapped = false;
+    for(let i=0; i< length-k-1; i++){
+      if(collection[i]> collection[i+1]){
+        temp = collection[i];
+        collection[i] = collection[i+1];
+        collection[i+1] = temp;
+        swapped = true;
+      }
+    }
+    k++;
+  }while(swapped);
+  return collection;
+}
+
+collection=[33, 103, 3, 726, 200];
+console.log(bubbleSort(collection));
+
+2.  Write pseudocode for quicksort.
+
+FUNCTION quickSort(arr, start , end)
+  IF start < end then
+    SET pIndex to CALL partition(arr, start, end) returning pIndex
+    CALL quicksort(arr, start, pIndex-1 )
+    CALL quicksort(arr, pIndex+1, end)
+  END IF
+  RETURN arr
+END FUNCTION
+
+FUNCTION partition(arr, start, end) is
+  SET pivot to arr[end]
+  SET pIndex to start
+  for i start to end - 1 do
+    if arr[i] < pivot then
+      swap arr[pIndex] with arr[i]
+      SET pIndex to pIndex + 1
+    END IF
+  END FOR
+  swap arr[pIndex] with arr[end]
+  return pIndex
+END FUNCTION
+
+
+function quickSort(arr, start , end){
+  let pIndex;
+  if(start < end){
+    pIndex = partition(arr, start, end);
+    quickSort(arr, start, pIndex-1 )
+    quickSort(arr, pIndex+1, end)
+  }
+  return arr;
+}
+
+function partition(arr, start, end){
+  let pivot = arr[end];
+  let pIndex = start;
+  for(let i=start; i<end; i++){
+    if(arr[i]<pivot){
+      let temp = arr[pIndex];
+      arr[pIndex] = arr[i];
+      arr[i] = temp;
+      pIndex += 1;
+    }
+  }
+  let temp = arr[pIndex];
+  arr[pIndex] = arr[end];
+  arr[end] = temp;
+  return pIndex;
+}
+
+arr = [7,2,1,6,8,5,3,4]
+console.log(quickSort(arr, 0, 7));
+
+3.  We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an
+algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort
+are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+Merge sort and quick sort have time complexity of O(n log(n)) making them more efficient than the other
+sorting algorithm, which have time complexity of O(n^2) because of the use of nested loops.
+
+* insertion sort  -   this involves nested loops (for and while) and so the time complexity = n^2
+* selection sort  -   this involves nested loops (2 for loops)and so the time complexity = n^2
+* bubble sort     -   this involves nested loops (for and do-while)and so the time complexity = n^2
+* merge sort      -   utilizes divide and conquer approach, which has time complexity of log(n); since
+                      this breaks down the list into n sub-list for sorting and then merges them back,
+                      the time complexity of merge sort is n*log(n)
+* quick sort      -   utilizes divide and conquer approach and recursion (makes recursive calls for sub-lists
+                      on left and right of pivot) making the time complexity of quick sort n*log(n) in best case.
+                      However, if we are going to get an array that is nearly sorted, we are going to run to
+                      do a lot of unnecessary comparisons, making the time complexity O(n^2).
+
+4.  All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain
+how it works. What is the ideal input for bucket sort?
+
+Bucket sort is a sorting algorithm that works by distributing the elements of an array into a number of buckets.
+Each bucket (with elements) is then sorted either using a different sorting algorithm, or by recursively applying
+the bucket sorting algorithm, and then elements from the bucket are put back into the original array in order.
+It does not do any element to element comparison. They are best suited when the input data is uniformly distributed
+over a range.
